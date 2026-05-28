@@ -18,7 +18,19 @@ const ORDER_BOOK_DEPTH = parseInt(process.env.ORDER_BOOK_DEPTH ?? '20', 10);
 const ORDER_BOOK_POLL_INTERVAL_MS = parseInt(process.env.ORDER_BOOK_POLL_INTERVAL_MS ?? '1000', 10);
 
 const app = express();
-app.use(cors({ origin: CLIENT_ORIGIN }));
+
+// Allow all origins in production (Render sets CLIENT_ORIGIN via env var)
+const allowedOrigins = CLIENT_ORIGIN === '*'
+  ? true
+  : (origin: string | undefined, cb: (e: Error | null, ok?: boolean) => void) => {
+      if (!origin || CLIENT_ORIGIN.split(',').map(o => o.trim()).includes(origin)) {
+        cb(null, true);
+      } else {
+        cb(new Error(`CORS: origin ${origin} not allowed`));
+      }
+    };
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 
 app.get('/health', (_req, res) => {
@@ -28,17 +40,21 @@ app.get('/health', (_req, res) => {
 const httpServer = http.createServer(app);
 
 const io = new Server<ClientToServerEvents, ServerToClientEvents>(httpServer, {
-  cors: { origin: CLIENT_ORIGIN, methods: ['GET', 'POST'] },
+  cors: {
+    origin: CLIENT_ORIGIN === '*' ? true : CLIENT_ORIGIN.split(',').map(o => o.trim()),
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
   pingInterval: 10_000,
   pingTimeout: 5_000,
+  // Allow both WebSocket and long-polling so the app works even behind
+  // proxies that don't support WebSocket upgrades.
+  transports: ['websocket', 'polling'],
 });
 
-// WS connection to Coinbase — used for the matches (trades) channel only.
-// The level2 channel now requires auth on the Exchange API.
 const coinbaseService = new CoinbaseService(COINBASE_WS_URL, COINBASE_RECONNECT_DELAY_MS);
 coinbaseService.connect();
 
-// REST poller for public order book snapshots.
 const bookPoller = new OrderBookPoller(COINBASE_REST_URL, ORDER_BOOK_POLL_INTERVAL_MS);
 
 const socketHandler = new SocketHandler(
@@ -51,10 +67,11 @@ const socketHandler = new SocketHandler(
 
 httpServer.listen(PORT, () => {
   console.log(`[Server] Listening on port ${PORT}`);
-  console.log(`[Server] Coinbase WS feed: ${COINBASE_WS_URL}`);
+  console.log(`[Server] Allowed origins: ${CLIENT_ORIGIN}`);
+  console.log(`[Server] Coinbase WS: ${COINBASE_WS_URL}`);
   console.log(`[Server] Coinbase REST: ${COINBASE_REST_URL}`);
-  console.log(`[Server] Order book poll interval: ${ORDER_BOOK_POLL_INTERVAL_MS}ms`);
-  console.log(`[Server] Order book push interval: ${PUSH_INTERVAL_MS}ms`);
+  console.log(`[Server] Order book poll: ${ORDER_BOOK_POLL_INTERVAL_MS}ms`);
+  console.log(`[Server] Push interval: ${PUSH_INTERVAL_MS}ms`);
 });
 
 const shutdown = (): void => {

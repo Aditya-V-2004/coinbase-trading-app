@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: coinbase-trading-server
+    runtime: node
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: node dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: COINBASE_WS_URL
+        value: wss://ws-feed.exchange.coinbase.com
+      - key: COINBASE_REST_URL
+        value: https://api.exchange.coinbase.com
+      - key: COINBASE_RECONNECT_DELAY_MS
+        value: 5000
+      - key: PUSH_INTERVAL_MS
+        value: 50
+      - key: ORDER_BOOK_DEPTH
+        value: 20
+      - key: ORDER_BOOK_POLL_INTERVAL_MS
+        value: 1000
+      # Set CLIENT_ORIGIN to your Vercel frontend URL after deploying the client
+      # e.g. https://coinbase-trading-app.vercel.app
+      - key: CLIENT_ORIGIN
+        value: "*"
