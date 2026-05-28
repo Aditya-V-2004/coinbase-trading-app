@@ -1,0 +1,118 @@
+.container {
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a0aec0;
+}
+
+.connectionRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background: #0f0f1a;
+  border: 1px solid #2a2a4a;
+  border-radius: 6px;
+}
+
+.connLabel {
+  font-size: 12px;
+  color: #718096;
+  font-weight: 600;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotGreen {
+  background: #48bb78;
+  box-shadow: 0 0 6px rgba(72, 187, 120, 0.6);
+}
+
+.dotRed {
+  background: #e53e3e;
+  box-shadow: 0 0 6px rgba(229, 62, 62, 0.6);
+}
+
+.textGreen {
+  font-size: 12px;
+  color: #68d391;
+  font-weight: 600;
+}
+
+.textRed {
+  font-size: 12px;
+  color: #fc8181;
+  font-weight: 600;
+}
+
+.subTitle {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.empty {
+  color: #4a5568;
+  font-size: 13px;
+}
+
+.channels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.channelCard {
+  background: #0f0f1a;
+  border: 1px solid #2a2a4a;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.channelName {
+  font-size: 12px;
+  font-weight: 700;
+  color: #90cdf4;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.productTag {
+  font-size: 11px;
+  background: rgba(144, 205, 244, 0.1);
+  color: #90cdf4;
+  border: 1px solid rgba(144, 205, 244, 0.3);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.none {
+  font-size: 12px;
+  color: #4a5568;
+}

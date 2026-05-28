@@ -1,0 +1,98 @@
+.container {
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a0aec0;
+  flex-shrink: 0;
+}
+
+.empty {
+  color: #4a5568;
+  font-size: 13px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.tableWrapper {
+  overflow-y: auto;
+  max-height: 460px;
+  flex: 1;
+}
+
+.tableWrapper::-webkit-scrollbar { width: 4px; }
+.tableWrapper::-webkit-scrollbar-track { background: #0f0f1a; }
+.tableWrapper::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 2px; }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  /* Fixed layout: column widths are set by <col> elements, not cell content.
+     This keeps Size and Price columns narrow and consistently aligned. */
+  table-layout: fixed;
+}
+
+/* Column widths */
+.colTime    { width: 80px; }
+.colProduct { width: 76px; }
+.colSide    { width: 44px; }
+.colSize    { width: 110px; }
+.colPrice   { width: 90px; }
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: #1a1a2e;
+  color: #718096;
+  font-weight: 600;
+  padding: 4px 8px;
+  text-align: left;
+  border-bottom: 1px solid #2a2a4a;
+  /* Prevent header text from wrapping in narrow columns */
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid rgba(42, 42, 74, 0.5);
+  transition: background 0.1s;
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.table td {
+  padding: 4px 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.buy td  { color: #68d391; }
+.sell td { color: #fc8181; }
+
+.side {
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Right-align headers and cells for the numeric columns */
+.right {
+  text-align: right !important;
+}

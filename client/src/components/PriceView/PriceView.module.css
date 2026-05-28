@@ -1,0 +1,113 @@
+.container {
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 8px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #a0aec0;
+}
+
+.empty {
+  color: #4a5568;
+  font-size: 13px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.books {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 520px;
+  overflow-y: auto;
+}
+
+.books::-webkit-scrollbar { width: 4px; }
+.books::-webkit-scrollbar-track { background: #0f0f1a; }
+.books::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 2px; }
+
+.book {
+  border: 1px solid #2a2a4a;
+  border-radius: 6px;
+  padding: 10px;
+  background: #0f0f1a;
+}
+
+.productName {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.sides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.side {
+  font-size: 11px;
+  min-width: 0;
+}
+
+/* "Bids" / "Asks" label — separate row above the column headers */
+.sideTitle {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #718096;
+  margin-bottom: 4px;
+}
+
+/* Column headers — same 3-column grid as data rows so they align perfectly */
+.sideHeader {
+  display: grid;
+  grid-template-columns: 6px 1fr 1fr;
+  gap: 4px;
+  color: #718096;
+  font-weight: 600;
+  padding-bottom: 4px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #2a2a4a;
+}
+
+/* Data row */
+.level {
+  display: grid;
+  grid-template-columns: 6px 1fr 1fr;
+  gap: 4px;
+  padding: 2px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Colour-indicator dot */
+.dot {
+  display: block;
+  width: 4px;
+  border-radius: 1px;
+  align-self: stretch;
+}
+
+.bid .dot { background: rgba(72, 187, 120, 0.7); }
+.bid span:nth-child(2) { color: #68d391; }
+.bid span:nth-child(3) { color: #a0aec0; }
+
+.ask .dot { background: rgba(245, 101, 101, 0.7); }
+.ask span:nth-child(2) { color: #fc8181; }
+.ask span:nth-child(3) { color: #a0aec0; }
+
+.noData {
+  color: #4a5568;
+  font-size: 11px;
+  padding: 4px 0;
+}

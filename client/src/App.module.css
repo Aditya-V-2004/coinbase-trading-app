@@ -1,0 +1,105 @@
+:root {
+  --bg: #0d0d1a;
+  --surface: #1a1a2e;
+  --border: #2a2a4a;
+  --text: #e2e8f0;
+  --muted: #a0aec0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Menlo', monospace;
+  font-size: 13px;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #12122a;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.headerTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #90cdf4;
+  letter-spacing: 0.02em;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dotGreen {
+  background: #48bb78;
+  box-shadow: 0 0 6px rgba(72, 187, 120, 0.6);
+}
+
+.dotRed {
+  background: #e53e3e;
+  box-shadow: 0 0 6px rgba(229, 62, 62, 0.6);
+}
+
+.statusText {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.errorBanner {
+  background: rgba(229, 62, 62, 0.15);
+  border-bottom: 1px solid rgba(229, 62, 62, 0.4);
+  color: #fc8181;
+  padding: 8px 24px;
+  font-size: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  flex: 1;
+}
+
+.cell {
+  min-width: 0;
+}
+
+.span2 {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .span2 {
+    grid-column: 1;
+  }
+}
